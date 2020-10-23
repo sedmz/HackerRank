@@ -13,7 +13,7 @@ import static java.util.stream.Collectors.toList;
 
 class Result {
     public static int birthdayCakeCandles(List<Integer> candles) {
-        int[] cnt = new int[100001];
+        int[] cnt = new int[10000001];
 
         int max = -1;
         for(int candle : candles) {
