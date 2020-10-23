@@ -7,26 +7,31 @@ import java.util.concurrent.*;
 import java.util.regex.*;
 
 public class Solution {
+    static void swap(int i, int j) {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
+
+    static int partition(int left, int right) {
+        int pivot = left, index = pivot;
+        for(int i = left + 1; i <= right; i++) {
+            if (arr[i] < arr[pivot]) {
+                swap(i, pivot);
+            }
+        }
+        swap(pivot, index);
+        return index;
+    }
+
     static void quickSort(int left, int right) {
         if (left >= right)
             return;
 
-        int pivot = left, index = pivot + 1;
-        for(int i = left + 1; i <= right; i++) {
-            if (arr[i] < arr[pivot]) {
-                int tmp = arr[i];
-                arr[i] = arr[index];
-                arr[index++] = tmp;
-            }
-        }
+        int pivotNewIndex = partition(left, right);        
 
-        index--;
-        int tmp = arr[pivot];
-        arr[pivot] = arr[index];
-        arr[index] = tmp;
-
-        quickSort(left, index - 1);
-        quickSort(index + 1, right);
+        quickSort(left, pivotNewIndex - 1);
+        quickSort(pivotNewIndex + 1, right);
     }
 
     private static final Scanner scanner = new Scanner(System.in);
